@@ -3,12 +3,10 @@ import NavBar from "../../components/bar/NavBar"
 import "./Movie.css"
 import { useEffect, useState } from "react"
 import { instance } from "../../../axios"
+import { AiFillStar } from "react-icons/ai"
+import LoadingSpinner from "../../utils/loader/LoadingSpinner"
 
 const Movie = () => {
-  type Rating = {
-    Source: string
-    Value: string
-  }
   type MovieData = {
     Title: string
     Poster: string
@@ -16,10 +14,13 @@ const Movie = () => {
     Director: string
     Actors: string
     Plot: string
-    Ratings: Rating[]
+    imdbRating: string
+    Year: string
+    Rated: string
+    Runtime: string
   }
   const params = useParams()
-  const [movieId, setMovieId] = useState(params.id)
+  const movieId = params.id
   const [movie, setMovie] = useState<MovieData>({
     Title: "",
     Poster: "",
@@ -27,7 +28,10 @@ const Movie = () => {
     Plot: "",
     Actors: "",
     Director: "",
-    Ratings: [],
+    imdbRating: "",
+    Year: "",
+    Rated: "",
+    Runtime: "",
   })
   const [loading, setLoading] = useState(true)
   const fetchMovieDetails = async () => {
@@ -50,8 +54,43 @@ const Movie = () => {
   return (
     <>
       <NavBar />
-      {loading && "Loading"}
-      {movie.Title}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="movie-details">
+          <div className="posterDiv">
+            <img
+              className="movie-poster"
+              src={movie.Poster}
+              alt={movie.Title}
+            />
+          </div>
+          <div className="dataDiv">
+            <div className="titleContainer">
+              <div>
+                <h2 className="movie-title">{movie.Title}</h2>
+                <span className="time">
+                  {movie.Year} | {movie.Runtime} | {movie.Rated}
+                </span>
+              </div>
+              <div>
+                <p className="movie-rating">
+                  Rating: {movie.imdbRating}{" "}
+                  <span className="star">
+                    <AiFillStar />
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className="overView">
+              <h4>OVERVIEW</h4>
+              <p className="movie-description">{movie.Plot}</p>
+              <p className="movie-director">Director: {movie.Director}</p>
+              <p className="movie-cast">Cast: {movie.Actors}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
