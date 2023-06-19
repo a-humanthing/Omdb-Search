@@ -17,6 +17,9 @@
   align-items: center;
   flex-direction: column;
 }
+.initial {
+  height: calc(100vh - 88px);
+}
 .search {
   margin-top: 2em;
 }

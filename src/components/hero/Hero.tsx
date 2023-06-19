@@ -28,7 +28,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className="heroContainer">
+      <div className={`heroContainer ${isSearched ? "" : "initial"}`}>
         <h1 className="headingText text-center">
           Watch Your Favorite Movies <br />{" "}
           <span className="text-danger">Now!</span>
