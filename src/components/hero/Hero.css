@@ -12,7 +12,7 @@
   background-position: center;
   background-size: contain;
 
-  height: calc(100vh - 88px);
+  height: calc(70vh - 88px);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -26,4 +26,12 @@
 .headingText {
   padding-top: 2em;
   font-weight: 800;
+}
+.resultContainer {
+  margin-top: -6em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+  margin-bottom: 3em;
 }
