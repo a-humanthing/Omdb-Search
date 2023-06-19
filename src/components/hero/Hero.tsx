@@ -4,6 +4,7 @@ import { instance } from "../../../axios.js"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Poster from "../movie/Poster.js"
+import { useAppSelector } from "../../app/hooks.js"
 
 const Hero = () => {
   type movieType = {
@@ -14,20 +15,11 @@ const Hero = () => {
     Type: string
   }
   const [poster, setPoster] = useState<movieType[]>([])
-  async function fetchPoster() {
-    try {
-      const response = await instance.get(
-        `/?apikey=${import.meta.env.VITE_API_KEY}&s=avatar`
-      )
-      console.log("response-", response)
-      setPoster(response.data.Search)
-    } catch (error) {
-      console.log("response err", error)
-    }
-  }
+  const results = useAppSelector((state) => state.result.results)
   useEffect(() => {
-    fetchPoster()
-  }, [])
+    setPoster(results)
+  }, [results])
+
   return (
     <>
       <div className="heroContainer">
@@ -38,17 +30,18 @@ const Hero = () => {
         <SearchInput />
       </div>
       <div className="resultContainer">
-        {poster.map((item) => (
-          <Link to={`/${item.imdbID}`} className="link">
-            <Poster
-              key={item.imdbID}
-              year={item.Year}
-              type={item.Type}
-              img={item.Poster}
-              title={item.Title}
-            />
-          </Link>
-        ))}
+        {poster &&
+          poster.map((item) => (
+            <Link to={`/${item.imdbID}`} className="link">
+              <Poster
+                key={item.imdbID}
+                year={item.Year}
+                type={item.Type}
+                img={item.Poster}
+                title={item.Title}
+              />
+            </Link>
+          ))}
       </div>
     </>
   )
