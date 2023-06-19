@@ -1,0 +1,29 @@
+/* Hero Bg Image */
+.heroContainer {
+  width: 100%;
+  background: rgb(236, 234, 228);
+  background: linear-gradient(
+    7deg,
+    rgb(241, 241, 239) 11%,
+    rgba(236, 177, 255, 1) 73%,
+    rgba(241, 241, 241, 1) 86%
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  height: calc(100vh - 88px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.search {
+  margin-top: 2em;
+}
+.searchInput {
+  min-width: 70vw;
+}
+.headingText {
+  padding-top: 2em;
+  font-weight: 800;
+}
