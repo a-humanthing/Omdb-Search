@@ -1,10 +1,12 @@
 import SearchInput from "../input/SearchInput"
 import "./Hero.css"
-import { instance } from "../../../axios.js"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Poster from "../movie/Poster.js"
 import { useAppSelector } from "../../app/hooks.js"
+import NoResult from "../../utils/noresult/NoResult.js"
+import LoadingSpinner from "../../utils/loader/LoadingSpinner.js"
+import Error from "../../utils/error/Error.js"
 
 const Hero = () => {
   type movieType = {
@@ -15,7 +17,11 @@ const Hero = () => {
     Type: string
   }
   const [poster, setPoster] = useState<movieType[]>([])
+
   const results = useAppSelector((state) => state.result.results)
+  const loading = useAppSelector((state) => state.result.loading)
+  const error = useAppSelector((state) => state.result.error)
+  const isSearched = useAppSelector((state) => state.result.isSearched)
   useEffect(() => {
     setPoster(results)
   }, [results])
@@ -29,20 +35,27 @@ const Hero = () => {
         </h1>
         <SearchInput />
       </div>
-      <div className="resultContainer">
-        {poster &&
-          poster.map((item) => (
-            <Link to={`/${item.imdbID}`} className="link">
-              <Poster
-                key={item.imdbID}
-                year={item.Year}
-                type={item.Type}
-                img={item.Poster}
-                title={item.Title}
-              />
-            </Link>
-          ))}
-      </div>
+      {isSearched && (
+        <div className="resultContainer">
+          {loading && <LoadingSpinner />}
+          {poster?.length ? (
+            poster.map((item) => (
+              <Link key={item.imdbID} to={`/${item.imdbID}`} className="link">
+                <Poster
+                  year={item.Year}
+                  type={item.Type}
+                  img={item.Poster}
+                  title={item.Title}
+                />
+              </Link>
+            ))
+          ) : !loading && !error ? (
+            <NoResult />
+          ) : (
+            <Error error={error} />
+          )}
+        </div>
+      )}
     </>
   )
 }

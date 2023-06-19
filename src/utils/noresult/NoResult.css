@@ -1,0 +1,23 @@
+.noResultCard {
+  width: 300px;
+  height: 200px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: #555555;
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
