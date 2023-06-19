@@ -37,8 +37,8 @@ const Hero = () => {
       </div>
       {isSearched && (
         <div className="resultContainer">
-          {loading && <LoadingSpinner />}
-          {poster?.length ? (
+          {loading ? <LoadingSpinner /> : ""}
+          {!loading && poster?.length ? (
             poster.map((item) => (
               <Link key={item.imdbID} to={`/${item.imdbID}`} className="link">
                 <Poster
