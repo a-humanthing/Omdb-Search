@@ -9,6 +9,7 @@ import LoadingSpinner from "../../utils/loader/LoadingSpinner.js"
 import Error from "../../utils/error/Error.js"
 
 const Hero = () => {
+  // type of data with essential fields
   type movieType = {
     Poster: string
     Title: string
@@ -18,10 +19,12 @@ const Hero = () => {
   }
   const [poster, setPoster] = useState<movieType[]>([])
 
+  //fetch search result from redux store
   const results = useAppSelector((state) => state.result.results)
   const loading = useAppSelector((state) => state.result.loading)
   const error = useAppSelector((state) => state.result.error)
   const isSearched = useAppSelector((state) => state.result.isSearched)
+
   useEffect(() => {
     setPoster(results)
   }, [results])

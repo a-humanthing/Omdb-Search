@@ -21,6 +21,8 @@ const initialState: InitialState = {
   isSearched: false,
 }
 
+//function will fetch result on the search event and set as global state
+
 export const fetchResults = createAsyncThunk(
   "result/fetchResult",
   async (title: string) => {
