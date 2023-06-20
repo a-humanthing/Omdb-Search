@@ -4,7 +4,7 @@ import { RiMovie2Line } from "react-icons/ri"
 
 const NavBar = () => {
   return (
-    <div>
+    <div className="navContainer">
       <Link to={"/"} className="link">
         <h2 className="navHead">
           Movie Cart <RiMovie2Line />

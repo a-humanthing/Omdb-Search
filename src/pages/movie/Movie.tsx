@@ -54,43 +54,45 @@ const Movie = () => {
   return (
     <>
       <NavBar />
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="movie-details">
-          <div className="posterDiv">
-            <img
-              className="movie-poster"
-              src={movie.Poster}
-              alt={movie.Title}
-            />
-          </div>
-          <div className="dataDiv">
-            <div className="titleContainer">
-              <div>
-                <h2 className="movie-title">{movie.Title}</h2>
-                <span className="time">
-                  {movie.Year} | {movie.Runtime} | {movie.Rated}
-                </span>
-              </div>
-              <div>
-                <p className="movie-rating">
-                  Rating: {movie.imdbRating}{" "}
-                  <span className="star">
-                    <AiFillStar />
+      <div className="movie-details">
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <div className="posterDiv">
+              <img
+                className="movie-poster"
+                src={movie.Poster}
+                alt={movie.Title}
+              />
+            </div>
+            <div className="dataDiv">
+              <div className="titleContainer">
+                <div>
+                  <h2 className="movie-title">{movie.Title}</h2>
+                  <span className="time">
+                    {movie.Year} | {movie.Runtime} | {movie.Rated}
                   </span>
-                </p>
+                </div>
+                <div>
+                  <p className="movie-rating">
+                    Rating: {movie.imdbRating}{" "}
+                    <span className="star">
+                      <AiFillStar />
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className="overView">
+                <h4>OVERVIEW</h4>
+                <p className="movie-description">{movie.Plot}</p>
+                <p className="movie-director">Director: {movie.Director}</p>
+                <p className="movie-cast">Cast: {movie.Actors}</p>
               </div>
             </div>
-            <div className="overView">
-              <h4>OVERVIEW</h4>
-              <p className="movie-description">{movie.Plot}</p>
-              <p className="movie-director">Director: {movie.Director}</p>
-              <p className="movie-cast">Cast: {movie.Actors}</p>
-            </div>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </>
   )
 }

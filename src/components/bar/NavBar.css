@@ -4,3 +4,11 @@
   color: #764abc;
   padding: 0.6em;
 }
+.navContainer {
+  position: fixed;
+  z-index: 2300;
+  height: 88px;
+  background-color: white;
+  width: 100%;
+  top: 0;
+}
